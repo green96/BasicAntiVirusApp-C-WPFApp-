@@ -1,0 +1,40 @@
+﻿<Page x:Class="WpfApplication1.AntivirusPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="AntivirusPage">
+    
+    <!--Phải luôn có thẻ Window và Grid và các thành phần giao diện phải bỏ trong Thẻ Grid-->
+    <Grid Margin="0,0,2,1">
+
+            <!--Cú pháp cơ bản: Content="Nội_Dung_Hiển_Thị_CủaButton..." 
+        x:Name="Tên_Của_ElementNày_Để_Truy_xuất_Trong-Code" 
+        Text="Text_Name" ==>  Nội_Dung_Hiển_Thị_Củatext
+        -->
+            <Button x:Name="HiButton" Content="Scan" HorizontalAlignment="Left" Margin="190,137,0,0" VerticalAlignment="Top" Width="74" Click="ButtonScan_Click" Cursor="Hand"/>
+            <TextBlock x:Name="HiBox" HorizontalAlignment="Left" Height="16" Margin="29,61,0,0" TextWrapping="Wrap" Text="File" VerticalAlignment="Top" Width="56" RenderTransformOrigin="-0.278,-0.301"/>
+            <TextBlock HorizontalAlignment="Left" Margin="29,82,0,0" TextWrapping="Wrap" Text="MD5" VerticalAlignment="Top" RenderTransformOrigin="0.497,0.125"/>
+            <Label x:Name="StatusLabel"  Content="Status: N/A" HorizontalAlignment="Left" Margin="29,126,0,0" VerticalAlignment="Top"/>
+            <Label Content="File" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.228,-0.218"/>
+            <TextBox x:Name="TbFilePath"  HorizontalAlignment="Left" Height="23" Margin="71,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="TbMD5" HorizontalAlignment="Left" Height="23" Margin="71,82,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <!-- Triggers the browse script
+        Click="Tên_Của_Hàm_Được_Gọi_Khi_Click_Button_Này"
+        -->
+
+        <TextBlock Text="Page 1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+        <!--Content Button này dài nên không dùng Margin="Left, Top, Right, Bottom" ==> chỉ set Left, Top còn lại giống dưới (Set Width và Height rõ ràng) -->
+        <Button x:Name="BrowseButton"
+        Content="Browse..."
+        Width="75"
+        Height="25"
+        Margin="71,11,0,0" 
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Click="BrowseButton_Click" Cursor="Hand"/>
+            <Label Content="Basic AntiVirus" HorizontalAlignment="Left" Margin="228,10,0,0" VerticalAlignment="Top" Cursor="Help"/>
+    </Grid>
+</Page>

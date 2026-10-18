@@ -13,3 +13,7 @@ C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\Wp
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\Malware_sample222_MD5.txt
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_Content.g.cs
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\AntivirusPage.baml
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\StorageAnalyzierPage.baml
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\AntivirusPage.g.cs
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\StorageAnalyzierPage.g.cs
