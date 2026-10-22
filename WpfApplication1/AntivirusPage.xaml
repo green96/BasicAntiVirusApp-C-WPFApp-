@@ -1,11 +1,13 @@
-﻿<Page x:Class="WpfApplication1.AntivirusPage"
+﻿<!--Title="AntivirusPage" Height="318" Width="530" ==> chỉnh width và height của page có title là AntivirusPage-->
+<Page x:Class="WpfApplication1.AntivirusPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="AntivirusPage">
+      
+	Title="AntivirusPage" Height="318" Width="530">
     
     <!--Phải luôn có thẻ Window và Grid và các thành phần giao diện phải bỏ trong Thẻ Grid-->
     <Grid Margin="0,0,2,1">

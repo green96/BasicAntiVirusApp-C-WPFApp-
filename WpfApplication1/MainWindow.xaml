@@ -1,4 +1,5 @@
-﻿<Window x:Class="WpfApplication1.MainWindow"
+﻿<!--Title="MainWindow" Height="318" Width="530" ==> chỉnh width và height của Page/Window có title là MainWindow-->
+<Window x:Class="WpfApplication1.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="318" Width="530">
