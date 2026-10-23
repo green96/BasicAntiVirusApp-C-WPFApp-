@@ -49,6 +49,12 @@ namespace WpfApplication1
             Main.Content = new StorageAnalyzierPage();
         }
 
+        private void ClickMoveToPage3(object sender, RoutedEventArgs e)
+        {
+            //Truyền và ghi đè tất cả nội dung XAML Trong Thẻ Grid của Class AntivirusPage vào Thẻ Grid của MainWindow() này
+            Main.Content = new TimerPage();
+        }
+
 
 
     }

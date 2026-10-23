@@ -36,3 +36,5 @@ C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\
 C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\WpfApplication1.g.resources
 C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\WpfApplication1.Properties.Resources.resources
 C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\TimerPage.baml
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\TimerPage.g.cs
