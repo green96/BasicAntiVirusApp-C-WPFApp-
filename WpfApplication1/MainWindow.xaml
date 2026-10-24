@@ -52,27 +52,29 @@
                 <RowDefinition></RowDefinition><!--Grid.Row="8"-->
             </Grid.RowDefinitions>
 
-            <!--Grid.Column="1" ==> Element này xuất hiện ở column thứ 2-->
+            <!--Grid.Column="1" ==> Element này xuất hiện ở column thứ 2 ==> tương tự Grid.Column="3" ==> Element này xuất hiện ở column thứ 4 -->
             <TextBlock Text="Bleu Basic"
                        Foreground="White"
-                       Grid.Column="1"
+                       Grid.Column="3"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontFamily="/Fonts/#Dosis"
                        FontWeight="Medium"
                        />
-            
+
             <TextBlock Text="AntiVirus"
                        Foreground="LightGray"
-                       Grid.Column="2"
+                       Grid.Column="4"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontFamily="/Fonts/#Dosis"
                        FontWeight="Medium"
+                       Cursor="Help"
                        />
+
             <TextBlock Text="PC Cleaner"
                        Foreground="LightGray"
-                       Grid.Column="3"
+                       Grid.Column="5"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontFamily="/Fonts/#Dosis"
@@ -82,9 +84,41 @@
 
 
             <!--StackPanel giống flexbox css nhưng mặc định từ trên xuống (giống Stack) ==> Orientation="Horizontal" để override mặc định ==> hiện từ trái qua phải-->
-            <!--Grid.Column="1": bắt đầu từ cột thứ 2 (đếm từ 0). Grid.ColumnSpan="6": chiếm 6 cột liên tiếp từ cột đã chọn, tức là Grid.Column=1, 2, 3, 4, 5 ,6 -->
-            <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" Orientation="Horizontal" Height="35" VerticalAlignment="Top">
-                <Button Content="Page 1" MinWidth="100" Click="ClickMoveToPage1">
+            <!--Grid.Column="1": bắt đầu từ cột thứ 2 (đếm từ 0). Grid.ColumnSpan="7": chiếm 7 cột liên tiếp từ cột đã chọn, tức là Grid.Column=1, 2, 3, 4, 5 ,6, 7(hiểu tương tự với Grid.Row="6")-->
+            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="7" Orientation="Horizontal" Height="35" VerticalAlignment="Top">
+                <Button Content="Home" MinWidth="60" Click="ClickBackToMain">
+                    <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                            <Setter Property="Background" Value="#FE6584"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <!--Foreground ở đây là text của button đó-->
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF4C70"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <!--Apply cái mẫu Style Border này vào Background của Button bằng TemplateBinding-->
+                            <Border Width="60" Height="25" CornerRadius="12" Background="{TemplateBinding Background}">
+
+
+                                <!--Hiện content của button và style mới của nó(hiện:Text...) bằng ContentPresenter-->
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+                <Button Content="Page 1" MinWidth="100" Click="ClickMoveToPage1" Margin="10,0,0,0">
                     <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
                     <Button.Style>
                         <Style TargetType="Button">
@@ -187,7 +221,11 @@
 
         <!--x:Name="Main" ==> gọi Main để truy xuất component Frame này-->
         <!--Frame = Container to hold all pages-->
-        <Frame x:Name="Main" Margin="0,35,0,0" NavigationUIVisibility="Hidden" />
+        <!-- Nội dung trang nằm bên dưới thanh điều hướng -->
+        <Frame x:Name="Main"
+           Grid.Row="1"
+           NavigationUIVisibility="Hidden"/>
+        
     </Grid>
      
 </Window>

@@ -55,6 +55,17 @@ namespace WpfApplication1
             Main.Content = new TimerPage();
         }
 
+        private void ClickBackToMain(object sender, RoutedEventArgs e)
+        {
+            //Về MainWindow
+            ((MainWindow)Application.Current.MainWindow).Main.Content = null;
+        }
+
+        private void Main_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
+
 
 
     }

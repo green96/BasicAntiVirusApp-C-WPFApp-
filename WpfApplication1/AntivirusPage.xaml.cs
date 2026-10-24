@@ -123,5 +123,32 @@ namespace WpfApplication1
          
              */
         }
+
+
+        //Xữ lý chuyển trang
+        private void ClickMoveToPage1(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).Main.Content
+            = new AntivirusPage();
+        }
+
+        private void ClickMoveToPage2(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).Main.Content
+            = new StorageAnalyzierPage();
+        }
+
+        private void ClickMoveToPage3(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).Main.Content
+            = new TimerPage();
+        }
+
+        private void ClickBackToMain(object sender, RoutedEventArgs e)
+        {
+            //Về MainWindow
+            ((MainWindow)Application.Current.MainWindow).Main.Content = null;
+        }
+
     }
 }
