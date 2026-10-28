@@ -66,8 +66,8 @@
     <Compile Include="StorageAnalyzierPage.xaml.cs">
       <DependentUpon>StorageAnalyzierPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TimerPage.xaml.cs">
-      <DependentUpon>TimerPage.xaml</DependentUpon>
+    <Compile Include="TempCleaner.xaml.cs">
+      <DependentUpon>TempCleaner.xaml</DependentUpon>
     </Compile>
     <Page Include="AntivirusPage.xaml">
       <SubType>Designer</SubType>
@@ -92,7 +92,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TimerPage.xaml">
+    <Page Include="TempCleaner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

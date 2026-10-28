@@ -141,7 +141,7 @@ namespace WpfApplication1
         private void ClickMoveToPage3(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).Main.Content
-            = new TimerPage();
+            = new CleanerPage();
         }
 
         private void ClickBackToMain(object sender, RoutedEventArgs e)

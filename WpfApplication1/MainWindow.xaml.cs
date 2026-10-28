@@ -52,7 +52,7 @@ namespace WpfApplication1
         private void ClickMoveToPage3(object sender, RoutedEventArgs e)
         {
             //Truyền và ghi đè tất cả nội dung XAML Trong Thẻ Grid của Class AntivirusPage vào Thẻ Grid của MainWindow() này
-            Main.Content = new TimerPage();
+            Main.Content = new CleanerPage();
         }
 
         private void ClickBackToMain(object sender, RoutedEventArgs e)
