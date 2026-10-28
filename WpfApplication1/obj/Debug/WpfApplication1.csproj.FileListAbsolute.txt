@@ -38,3 +38,9 @@ C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\
 C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\TimerPage.baml
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\TimerPage.g.cs
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.lref
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
