@@ -81,12 +81,19 @@
                        FontWeight="Medium"
                        />
 
-
+            <Image Source="Pictures/apple.jpg" />
 
             <!--StackPanel giống flexbox css nhưng mặc định từ trên xuống (giống Stack) ==> Orientation="Horizontal" để override mặc định ==> hiện từ trái qua phải-->
             <!--Grid.Column="1": bắt đầu từ cột thứ 2 (đếm từ 0). Grid.ColumnSpan="7": chiếm 7 cột liên tiếp từ cột đã chọn, tức là Grid.Column=1, 2, 3, 4, 5 ,6, 7(hiểu tương tự với Grid.Row="6")-->
             <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="7" Orientation="Horizontal" Height="35" VerticalAlignment="Top">
-                <Button Content="Home" MinWidth="60" Click="ClickBackToMain">
+                <!--Add Image To Button (Thẻ Image phải ở trong thẻ Button)-->
+                <Button MinWidth="60" Click="ClickBackToMain">
+
+                    <!--Lưu ý: không thể ép Button nhận cả Content="Home" lẫn thẻ <Image> bên trong Một Button-->
+                    <!--Add Image To Button (Thẻ Image phải ở trong thẻ Button)-->
+                    <Image Height="24" Width="24" Source="Images/home_and_garden_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png"/>
+
+
                     <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
                     <Button.Style>
                         <Style TargetType="Button">
