@@ -43,3 +43,7 @@ C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\Wp
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
 C:\Users\david\OneDrive\Documents\Visual Studio 2013\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
+C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\TempCleaner.baml
+C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\TempCleaner.g.cs
+C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\dokho\Documents\GitHub\BasicAntiVirusApp-C-WPFApp-\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.lref

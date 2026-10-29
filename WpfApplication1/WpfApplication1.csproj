@@ -128,6 +128,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\opened-folder.png" />
+    <Resource Include="Images\home_and_garden_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+    <Resource Include="Images\home_storage_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+    <Resource Include="Images\mop_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+    <Resource Include="Images\shield_locked_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png" />
+    <Resource Include="Images\home_and_garden_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+    <Resource Include="Images\mop_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+    <Resource Include="Images\shield_locked_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+    <Resource Include="Images\storage_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
     <Content Include="Malware_sample222_MD5.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
