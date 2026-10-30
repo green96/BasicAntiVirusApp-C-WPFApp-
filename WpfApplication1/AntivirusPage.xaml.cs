@@ -123,10 +123,17 @@ namespace WpfApplication1
                 return;
             }
 
+            // Hiển thị Loading Cursor
+            Mouse.OverrideCursor = Cursors.Wait;
+
+            // Vô hiệu hóa nút Scan để tránh click nhiều lần
+            HiButton.IsEnabled = false;
+
             try
             {
                 int totalFiles;
 
+                // Chạy quá trình scan trên Background Thread
                 // Tìm MD5 trong toàn bộ database (Database này chỉ lưu tất cả nội dung file virusShare)
                 bool isInfected = SearchMD5Database(
                     targetMD5,
@@ -157,7 +164,16 @@ namespace WpfApplication1
                     "Scan error: " + ex.Message
                 );
             }
+            finally
+            {
+                //finally ==>Luôn thực thi để khôi phục Cursor và nút Scan.
 
+                // Khôi phục Cursor bình thường
+                Mouse.OverrideCursor = null;
+
+                // Cho phép click Scan trở lại
+                HiButton.IsEnabled = true;
+            }
             /*
             Mẹo test để thấy kết quả Infected!:
             Copy một đoạn nhỏ mã MD5 mẫu có sẵn trong file Malware_sample222_MD5.txt (ví dụ: 5fa178eb37af1ad39165434d4cf612fa).
