@@ -82,7 +82,7 @@
                        />
 
             <TextBlock Text="AntiVirus"
-                       Foreground="White"
+                       Foreground="LightGray"
                        Grid.Column="4"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -92,14 +92,28 @@
                        />
 
             <TextBlock Text="PC Cleaner"
-                       Foreground="LightGray"
+                       Foreground="White"
                        Grid.Column="5"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontFamily="/Fonts/#Dosis"
                        FontWeight="Medium"
                        />
-
+            
+            <TextBlock Text="Cleaner"
+                       Foreground="White"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="/Fonts/#Dosis"
+                       FontWeight="Medium" 
+                       FontSize="22"
+                       />
+            
+            <!--Lưu ý: Chức năng của 2 button này chỉ hoạt động khi build ra App-->
+            
             <Button x:Name="ClearTempbtn" Content="Clear Temp" MinWidth="100" Click="ClickMoveToClearTemp" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top">
 
                 <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
@@ -170,20 +184,69 @@
             </Button>
 
             <!--StackPanel giống flexbox css nhưng mặc định từ trên xuống (giống Stack) ==> Orientation="Horizontal" để override mặc định ==> hiện từ trái qua phải-->
-            <!--Grid.Column="1": bắt đầu từ cột thứ 2 (đếm từ 0). Grid.ColumnSpan="7": chiếm 7 cột liên tiếp từ cột đã chọn, tức là Grid.Column=1, 2, 3, 4, 5 ,6, 7(hiểu tương tự với Grid.Row="6")-->
-            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="7" Orientation="Horizontal" Height="35" VerticalAlignment="Top">
-                <Button Content="Home" MinWidth="60" Click="ClickBackToMain" Height="35" VerticalAlignment="Top">
+            <!--Grid.Column="3": bắt đầu từ cột thứ 4 (đếm từ 0). Grid.ColumnSpan="4": chiếm 4 cột liên tiếp từ cột đã chọn, tức là Grid.Column=3,4,5,6 (hiểu tương tự với Grid.Row="6")-->
+            <StackPanel Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="4" Orientation="Horizontal" Height="35" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-7"/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <!--Add Image To Button (Thẻ Image phải ở trong thẻ Button)-->
+                <Button Width="30" Height="30" Click="ClickBackToMain">
+
+                    <!--Lưu ý: không thể ép Button nhận cả Content="Home" lẫn thẻ <Image> bên trong Một Button-->
+                    <!--Add Image To Button (Thẻ Image phải ở trong thẻ Button)-->
+                    <Image Height="24" Width="24" Source="Images/home_and_garden_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"/>
+
+
                     <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
-                            <Setter Property="Background" Value="#FE6584"/>
+                            <Setter Property="Background" Value="#39385D"/>
                             <Setter Property="Cursor" Value="Hand"/>
                             <Setter Property="Foreground" Value="White"/>
                             <!--Foreground ở đây là text của button đó-->
+
+                            <!--Xử lý sự kiện Trigger và Animation bằng Storyboards VD: OnClick,IsMouseOver-->
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF4C70"/>
+
+                                    <!--Setter ==> gán các thuộc tính của button khi IsMouseOver-->
+                                    <Setter Property="Background" Value="#FF646287"/>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is True (Chuột di chuyển qua cái nút)-->
+                                    <Trigger.EnterActions>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )
+                                        Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3" ==> change Button Width to 35 For 0.3 seconds When EnterActions
+                                        -->
+                                        <BeginStoryboard Name="MouseEnterStoryboard">
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="35" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.EnterActions>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is False (Chuột Không di chuyển qua cái nút nữa)-->
+                                    <Trigger.ExitActions>
+                                        <!--Reset Storyboard trước để tránh bug Animation-->
+                                        <StopStoryboard BeginStoryboardName="MouseEnterStoryboard"/>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )-->
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="30" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="30" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.ExitActions>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -191,8 +254,11 @@
 
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <!--Apply cái mẫu Style Border này vào Background của Button bằng TemplateBinding-->
-                            <Border Width="60" Height="25" CornerRadius="12" Background="{TemplateBinding Background}">
+                            <!--Apply cái mẫu Style Border này vào Background của Button bằng TemplateBinding
+                            Width="{TemplateBinding Width} ==> Apply thuộc tính Width đã tạo ở trên Của Button vào Border
+                            Height="{TemplateBinding Height ==> Apply thuộc tính Width đã tạo ở trên Của Button vào Border
+                            -->
+                            <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" CornerRadius="12" Background="{TemplateBinding Background}">
 
 
                                 <!--Hiện content của button và style mới của nó(hiện:Text...) bằng ContentPresenter-->
@@ -204,7 +270,12 @@
                     </Button.Template>
 
                 </Button>
-                <Button Content="Page 1" MinWidth="100" Click="ClickMoveToPage1" Margin="10,0,0,0">
+                <Button  Width="30" Height="30" Click="ClickMoveToPage1" Margin="10,0,0,0">
+
+                    <!--Lưu ý: không thể ép Button nhận cả Content="Home" lẫn thẻ <Image> bên trong Một Button-->
+                    <!--Add Image To Button (Thẻ Image phải ở trong thẻ Button)-->
+                    <Image Height="24" Width="24" Source="Images/shield_locked_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"/>
+
                     <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
                     <Button.Style>
                         <Style TargetType="Button">
@@ -216,6 +287,36 @@
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#FF4C70"/>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is True (Chuột di chuyển qua cái nút)-->
+                                    <Trigger.EnterActions>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )
+                                        Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3" ==> change Button Width to 35 For 0.3 seconds When EnterActions
+                                        -->
+                                        <BeginStoryboard Name="MouseEnterStoryboard">
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="35" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.EnterActions>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is False (Chuột Không di chuyển qua cái nút nữa)-->
+                                    <Trigger.ExitActions>
+                                        <!--Reset Storyboard trước để tránh bug Animation-->
+                                        <StopStoryboard BeginStoryboardName="MouseEnterStoryboard"/>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )-->
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="30" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="35" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.ExitActions>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -224,7 +325,7 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <!--Apply cái mẫu Style Border này vào Background của Button bằng TemplateBinding-->
-                            <Border Width="100" Height="25" CornerRadius="12" Background="{TemplateBinding Background}">
+                            <Border  Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" CornerRadius="12" Background="{TemplateBinding Background}">
 
 
                                 <!--Hiện content của button và style mới của nó(hiện:Text...) bằng ContentPresenter-->
@@ -236,7 +337,11 @@
                     </Button.Template>
 
                 </Button>
-                <Button Content="Page 2" MinWidth="100" Click="ClickMoveToPage2" Margin="10,0,0,0">
+                <Button Width="30" Height="30" Click="ClickMoveToPage2" Margin="10,0,0,0">
+
+                    <!--Lưu ý: không thể ép Button nhận cả Content="Home" lẫn thẻ <Image> bên trong Một Button-->
+                    <!--Add Image To Button (Thẻ Image phải ở trong thẻ Button)-->
+                    <Image Height="24" Width="24" Source="Images/storage_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"/>
 
                     <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
                     <Button.Style>
@@ -248,7 +353,37 @@
                             <!--Foreground ở đây là text của button đó-->
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#3A3952"/>
+                                    <Setter Property="Background" Value="#FF646287"/>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is True (Chuột di chuyển qua cái nút)-->
+                                    <Trigger.EnterActions>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )
+                                        Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3" ==> change Button Width to 35 For 0.3 seconds When EnterActions
+                                        -->
+                                        <BeginStoryboard Name="MouseEnterStoryboard">
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="35" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.EnterActions>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is False (Chuột Không di chuyển qua cái nút nữa)-->
+                                    <Trigger.ExitActions>
+                                        <!--Reset Storyboard trước để tránh bug Animation-->
+                                        <StopStoryboard BeginStoryboardName="MouseEnterStoryboard"/>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )-->
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="30" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="35" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.ExitActions>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -257,7 +392,7 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <!--Apply cái mẫu Style Border này vào Background của Button bằng TemplateBinding-->
-                            <Border Width="100" Height="25" CornerRadius="12" Background="{TemplateBinding Background}">
+                            <Border  Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" CornerRadius="12" Background="{TemplateBinding Background}">
 
 
                                 <!--Hiện content của button và style mới của nó(hiện:Text...) bằng ContentPresenter-->
@@ -269,7 +404,12 @@
                     </Button.Template>
 
                 </Button>
-                <Button Content="Page 3" MinWidth="100" Click="ClickMoveToPage3" Margin="10,0,0,0">
+                <Button Width="30" Height="30" Click="ClickMoveToPage3" Margin="10,0,0,0">
+
+                    <!--Lưu ý: không thể ép Button nhận cả Content="Home" lẫn thẻ <Image> bên trong Một Button-->
+                    <!--Add Image To Button (Thẻ Image phải ở trong thẻ Button)-->
+                    <Image Height="24" Width="24" Source="Images/mop_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"/>
+
                     <!--Tạo Style Cho Button (TargetType="Button" ==> chọn element để style là Button)-->
                     <Button.Style>
                         <Style TargetType="Button">
@@ -281,6 +421,36 @@
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#FF4C70"/>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is True (Chuột di chuyển qua cái nút)-->
+                                    <Trigger.EnterActions>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )
+                                        Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3" ==> change Button Width to 35 For 0.3 seconds When EnterActions
+                                        -->
+                                        <BeginStoryboard Name="MouseEnterStoryboard">
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="35" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="35" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.EnterActions>
+
+                                    <!--Trigger.EnterActions ==> Is An Action That Play When IsMouseOver is False (Chuột Không di chuyển qua cái nút nữa)-->
+                                    <Trigger.ExitActions>
+                                        <!--Reset Storyboard trước để tránh bug Animation-->
+                                        <StopStoryboard BeginStoryboardName="MouseEnterStoryboard"/>
+
+                                        <!--Animation Tag Here (Storyboard allow us to group animation together )-->
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Width" To="30" Duration="0:0:0.3"/>
+                                                <DoubleAnimation  Storyboard.TargetProperty="Height" To="35" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+
+                                    </Trigger.ExitActions>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -289,7 +459,7 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <!--Apply cái mẫu Style Border này vào Background của Button bằng TemplateBinding-->
-                            <Border Width="100" Height="25" CornerRadius="12" Background="{TemplateBinding Background}">
+                            <Border  Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" CornerRadius="12" Background="{TemplateBinding Background}">
 
 
                                 <!--Hiện content của button và style mới của nó(hiện:Text...) bằng ContentPresenter-->

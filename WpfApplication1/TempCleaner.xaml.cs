@@ -24,6 +24,7 @@ namespace WpfApplication1
             InitializeComponent();
         }
 
+        //Lưu ý: Chức năng của 2 button này chỉ hoạt động khi build ra App
         private void ClickMoveToClearPrefetch(object sender, RoutedEventArgs e)
         {
 
@@ -69,8 +70,8 @@ namespace WpfApplication1
                 MessageBox.Show("Cant Clear Prefetch", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-    
 
+        //Lưu ý: Chức năng của 2 button này chỉ hoạt động khi build ra App
         private void ClickMoveToClearTemp(object sender, RoutedEventArgs e)
         {
             //Lưu thông tin Directory(Thư mục hay Folder) từ Path của hàm GetTempPath() và biến temp_1

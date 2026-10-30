@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Text.RegularExpressions;//Thư viện Regex (Regex cung cấp các Hàm,thuộc tính... giúp tìm tất cả chuỗi MD5 có đúng 32 ký tự hexadecimal trong từng file TXT.)
 //Import thự viện cung cấp các hàm,thuộc tính mã hóa bảo mật
 using System.Security.Cryptography;
 //Import thự viện cung cấp các hàm,thuộc tính xử lý, đọc file (input,output)
@@ -35,27 +35,35 @@ namespace WpfApplication1
             InitializeComponent();
         }
 
+
         public string GetMDSFromFile(string filePath)
         {
-            // Nếu chọn file text test chứa chuỗi mã MD5 32 ký tự
+            // Ưu tiên lấy MD5 có sẵn bên trong file TXT
             try
             {
                 FileInfo fi = new FileInfo(filePath);
+
                 if (fi.Length < 10000)
                 {
                     string content = File.ReadAllText(filePath);
-                    string[] words = content.Split(new[] { ' ', '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (var w in words)
+
+                    Match match = Regex.Match(
+                        content,
+                        @"\b[a-fA-F0-9]{32}\b"
+                    );
+
+                    if (match.Success)
                     {
-                        if (w.Trim().Length == 32)
-                        {
-                            return w.Trim().ToLower();
-                        }
+                        return match.Value.ToLower();
                     }
                 }
             }
-            catch { }
+            catch
+            {
+                // Nếu không đọc được nội dung thì chuyển sang tính MD5
+            }
 
+            // Nếu không có MD5 bên trong file thì tính MD5 thực tế
             //using ở đây giúp tự động giải phóng đối tượng sau khi thực hiện xong khối lệnh ==> giúp không cần tự gọi: md5.Dispose();
             //MD5.Create() ==> tạo đối tượng chứa các hàm,thuộc tính để thực hiện thuật toán MD5 lưu vào biến md5 ==> md5 sẽ sử dụng được các hàm của MD5 bằng md5.Attribute/Function
             using (var md5 = MD5.Create())
@@ -97,22 +105,57 @@ namespace WpfApplication1
         {
 
             //Đọc Tất cả dòng trong file Malware_sample222_MD5.txt và lưu vào biến md5signature
-            var md5signature = File.ReadAllLines("Malware_sample222_MD5.txt");
+            //var md5signature = File.ReadAllLines("Malware_sample222_MD5.txt");
 
-
-            // Kiểm tra MD5 có tồn tại trong danh sách không
-            if (md5signature.Contains(TbMD5.Text)) //Nếu md5signature chứa TbMD5.Text ==> Bất kỳ ký tự đã lưu trong biến md5signature mà giống(chứa) TbMD5.Text ==> Infected!
+            // Kiểm tra dữ liệu đầu vào
+            if (string.IsNullOrWhiteSpace(TbMD5.Text))
             {
-                //Thay đổi Content của Label thành Infected
-                StatusLabel.Content = "Infected!";
-                //Đổi màu text
-                StatusLabel.Foreground = Brushes.Red;
+                MessageBox.Show("Please Select File To Scan!");
+                return;
             }
-            else
+            // Kiểm tra MD5 có đúng định dạng không
+            string targetMD5 = TbMD5.Text.Trim().ToLower();
+
+            if (!Regex.IsMatch(targetMD5, @"\A[a-f0-9]{32}\z"))
             {
-                StatusLabel.Content = "Clean!";
-                //Đổi màu text
-                StatusLabel.Foreground = Brushes.Green;
+                //targetMD5 không đúng quy định string của Regex(kỹ tự từ a đến f, từ 0 đến 9, Tổng là 32 ký tự) ==> Thì chạy thông báo dưới
+                MessageBox.Show("Invalid MD5!");
+                return;
+            }
+
+            try
+            {
+                int totalFiles;
+
+                // Tìm MD5 trong toàn bộ database (Database này chỉ lưu tất cả nội dung file virusShare)
+                bool isInfected = SearchMD5Database(
+                    targetMD5,
+                    out totalFiles
+                );
+
+                if (isInfected)
+                {
+                    StatusLabel.Content = "Infected!";
+                    StatusLabel.Foreground = Brushes.Red;
+                }
+                else
+                {
+                    StatusLabel.Content = "Clean!";
+                    StatusLabel.Foreground = Brushes.Green;
+                }
+
+                MessageBox.Show(
+                    "Scan completed!\n" +
+                    "MD5: " + targetMD5 + "\n" +
+                    "Total TXT files: " + totalFiles + "\n" +
+                    "Result: " + (isInfected ? "Infected!" : "Clean!")
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Scan error: " + ex.Message
+                );
             }
 
             /*
@@ -122,6 +165,89 @@ namespace WpfApplication1
             Bấm nút Scan Kết quả sẽ báo Infected! màu đỏ.
          
              */
+        }
+
+
+        private bool SearchMD5Database(
+            //phải truyền targetMD5 khi gọi hàm để lấy path
+            string targetMD5,
+
+            //out int totalFiles ==> Đây là tham số đầu ra (out).
+            //out int totalFiles ==> Nó cho phép hàm truyền dữ liệu totalFiles ngược trở lại nơi gọi hàm.
+            out int totalFiles)
+        {
+            //Sau khi hàm chạy xong, biến totalFiles sẽ nhận số lượng file database đã kiểm tra ==> truyền dữ liệu totalFiles ngược trở lại nơi gọi hàm (Dùng tham số out int totalFiles)
+            totalFiles = 0;
+
+            // Đường dẫn Malware_sample\VirusShare_Hashes
+            string folderPath = System.IO.Path.GetFullPath(
+                System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    @"..\..\Malware_sample\VirusShare_Hashes"
+                )
+            );
+            /*
+            AppDomain.Domain.CurrentDomain.BaseDirectory: lấy thư mục chạy chương trình, thường là bin\Debug.
+            ..\..: quay ngược hai cấp về thư mục project WpfApplication1.
+            Malware_sample\VirusShare_Hashes: truy cập thư mục chứa dữ liệu MD5.
+            Path.GetFullPath(): chuyển đường dẫn tương đối thành đường dẫn tuyệt đối.
+             */
+
+            // Kiểm tra thư mục
+            if (!Directory.Exists(folderPath))
+            {
+                throw new DirectoryNotFoundException(
+                    "Cannot find database folder:\n" + folderPath
+                );
+            }
+
+            // Lấy tất cả file TXT
+            string[] files = Directory.GetFiles(
+                folderPath,
+                "*.txt",
+                SearchOption.AllDirectories
+            );
+
+            totalFiles = files.Length;
+
+            if (totalFiles == 0)
+            {
+                throw new FileNotFoundException(
+                    "No TXT files found in database!"
+                );
+            }
+
+            // Duyệt từng file TXT
+            foreach (string file in files)
+            {
+                try
+                {
+                    // Đọc từng dòng, không tải toàn bộ file vào RAM
+                    foreach (string line in File.ReadLines(file))
+                    {
+                        // Tìm chính xác MD5 cần kiểm tra
+                        if (Regex.IsMatch(
+                            line,
+                            @"\b" + Regex.Escape(targetMD5) + @"\b",
+                            RegexOptions.IgnoreCase))
+                        {
+                            // Tìm thấy chữ ký virus
+                            return true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Bỏ qua file không đọc được
+                    Console.WriteLine(
+                        "Cannot read: " + file +
+                        "\n" + ex.Message
+                    );
+                }
+            }
+
+            // Không tìm thấy MD5 trong database
+            return false;
         }
 
 
